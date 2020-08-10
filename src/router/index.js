@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/boot',
-    component: () => import(/* webpackChunkName: "boot" */ '../views/Boot.vue')
+    component: () => import(/* webpackChunkName: "boot" */ '../views/boot/index.js')
   },
   {
     path: '/parametric',

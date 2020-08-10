@@ -19,15 +19,22 @@ export default {
 
   mounted () {
     this.renderer = new Three.WebGLRenderer({ canvas: this.$refs.canvas })
+    this.renderer.shadowMap.enabled = true
     this.scene = new Three.Scene()
     this.scene.background = new Three.Color('black')
     this.createCamera()
     this.createLight()
 
+    this.init()
+
     requestAnimationFrame(this.render.bind(this))
   },
 
   methods: {
+    init () {
+
+    },
+
     createCamera (fov = 40, aspect = 2, near = 0.1, far = 100) {
       const camera = this.camera = new Three.PerspectiveCamera(fov, aspect, near, far)
       camera.position.set(0, 10, 20)
@@ -36,8 +43,15 @@ export default {
 
     createLight (color = 0xFFFFFF, indensity = 1) {
       const light = this.light = new Three.DirectionalLight(color, indensity)
-      light.position.set(0, 20, 15)
-      light.target.position.set(-5, 0, 0)
+      light.castShadow = true
+      light.position.set(0, 10, 0)
+      light.target.position.set(-5, 0, -5)
+      light.shadow.camera.left = -20
+      light.shadow.camera.right = 20
+      light.shadow.camera.top = 20
+      light.shadow.camera.bottom = -20
+      light.shadow.camera.near = 0.1
+      light.shadow.camera.far = 30
 
       this.scene.add(light)
       this.scene.add(light.target)
