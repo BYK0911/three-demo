@@ -6,6 +6,10 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '*',
+    redirect: { path: '/' }
+  },
+  {
     path: '/',
     component: Home
   },
@@ -20,7 +24,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
